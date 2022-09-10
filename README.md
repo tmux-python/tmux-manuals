@@ -1,5 +1,5 @@
-For studying the differences between prior tmux versions to check
-compatibility with legacy versions.
+For studying the differences between prior tmux versions to check compatibility with legacy
+versions.
 
 Get source:
 
@@ -23,5 +23,5 @@ repeat for versions.
 Create a git-diff style diff of version manuals:
 
 ```bash
-$ diff -u 1.6 1.8 > 1_6__1_8.diff
+$ diff -u manual/1.6.txt manual/1.8.txt
 ```
