@@ -3,6 +3,7 @@
 import dataclasses
 import pathlib
 import re
+import textwrap
 import typing as t
 
 cwd = pathlib.Path(__file__).parent
@@ -72,8 +73,23 @@ def run() -> int:
 
     for manual in version_map.values():
         print(f"tmux {manual.version}")
-        formats = ", ".join([format.variable_name for format in manual.formats])
-        print(f"     Formats: {formats}")
+
+        # Array
+        formats = ", ".join([f'"{format.variable_name}"' for format in manual.formats])
+        print(f"     Formats: [{formats}]")
+
+        # Dataclass
+        print(
+            textwrap.dedent(
+                f"""
+@dataclasses.dataclass
+class TmuxObject:
+    """
+                + "\n    ".join(
+                    [f"{format.variable_name}: str" for format in manual.formats]
+                )
+            )
+        )
 
     return 0
 
