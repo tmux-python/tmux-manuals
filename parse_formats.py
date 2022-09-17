@@ -86,10 +86,27 @@ def run() -> int:
 class TmuxObject:
     """
                 + "\n    ".join(
-                    [f"{format.variable_name}: str" for format in manual.formats]
+                    [
+                        f"{format.variable_name}: str | None = None"
+                        for format in manual.formats
+                    ]
                 )
             )
         )
+
+        raw_formats = [format.variable_name for format in manual.formats]
+
+        if manual.version == "3.0a":
+            try:
+                assert "pane_title" in raw_formats
+            except AssertionError:
+                print("Should have pane title")
+                raise
+        elif manual.version == "3.3":
+            try:
+                assert "pane_title" not in raw_formats
+            except AssertionError:
+                print("Should not have pane_title")
 
     return 0
 
